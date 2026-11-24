@@ -1,0 +1,48 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+body{margin:0;background:#0b0e14;color:#e6e9ef;font-family:ui-sans-serif,system-ui}
+.wrap{padding:28px 32px;max-width:1100px}
+h1{font-size:26px;margin:0 0 4px}.sub{color:#8b95a7;font-size:13px;margin-bottom:20px}
+.card{background:#121724;border:1px solid #232b3d;border-radius:12px;padding:16px 18px;margin-bottom:14px}
+.head{display:flex;justify-content:space-between;align-items:baseline}
+.gpu{font-size:18px;font-weight:600}.verdict{font-size:15px;font-weight:700;padding:2px 10px;border-radius:6px}
+.PASS{background:#0f3;color:#062;font-size:13px}.FAIL,.ERROR{background:#f33;color:#fff}
+.PASS{color:#3ddc84;background:#0d2b1c}.FAIL{color:#ff6b6b;background:#2b0d0d}.ERROR{color:#ffb86b;background:#2b1a0d}
+.meta{color:#8b95a7;font-size:12px;margin-top:2px}
+.stats{display:flex;gap:26px;margin-top:12px;font-size:13px}
+.stats b{display:block;font-size:19px;color:#fff}
+.flag{color:#ffb86b;font-weight:600}.ok{color:#3ddc84}
+code{background:#1a2233;padding:1px 6px;border-radius:4px;font-size:11px;color:#9ecbff}
+.foot{color:#5b6577;font-size:11px;margin-top:18px}
+</style></head>
+<body><div class="wrap">
+<h1>siliconref — independent LLM-stack scorecards</h1>
+<div class="sub">hash-pinned probe matrix 5a88fddd07aa08e5… · 2 chained receipts · chain head 21653629200d118a…</div>
+
+<div class="card">
+  <div class="head"><div class="gpu">NVIDIA GB10 (DGX Spark)</div>
+  <div class="verdict FAIL">FAIL</div></div>
+  <div class="meta">TensorFold (vLLM-compatible) · Qwen3.8-Flash-Next · vendor-managed</div>
+  <div class="stats">
+    <div><b>33.545</b>med tok/s</div>
+    <div><b>8.9–45.13</b>range</div>
+    <div><b>0.1269s</b>median TTFT</div>
+    <div><b>0.5463</b>bimodality <span class="ok">stable</span></div>
+    <div><b>24</b>samples</div>
+  </div>
+  <div class="meta">reproduce: <code>endpoint managed by TensorFold recipe on spark-fceb; see siliconref METHOD.md</code></div>
+</div>
+<div class="card">
+  <div class="head"><div class="gpu">Apple M3 Pro (18GB)</div>
+  <div class="verdict PASS">PASS</div></div>
+  <div class="meta">llama.cpp Metal · Qwen3-4B-Instruct-2507-Q4_K_M · Q4_K_M</div>
+  <div class="stats">
+    <div><b>49.14</b>med tok/s</div>
+    <div><b>43.83–50.52</b>range</div>
+    <div><b>0.0241s</b>median TTFT</div>
+    <div><b>0.6645</b>bimodality <span class="ok">stable</span></div>
+    <div><b>24</b>samples</div>
+  </div>
+  <div class="meta">reproduce: <code>llama-server -m Qwen3-4B-Instruct-2507-Q4_K_M.gguf --port 8777 -ngl 99 (sha256 3605803b982cb64a…)</code></div>
+</div>
+<div class="foot">Every number reproducible: exact commands above. Chain: edit any receipt and every later link breaks. github.com/ar33s08/siliconref</div>
+</div></body></html>

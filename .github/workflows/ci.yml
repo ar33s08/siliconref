@@ -1,0 +1,27 @@
+name: ci
+on: [push, pull_request]
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: detector + chain selftest (must pass AND must fail)
+        run: python3 scripts/selftest.py
+      - name: receipts chain verify + certificate build
+        run: python3 board/aggregate.py
+      - name: matrix pin present in every receipt
+        run: |
+          python3 - <<'EOF'
+          import hashlib, json
+          want = hashlib.sha256(open("harness/matrix.json","rb").read()).hexdigest()
+          n = 0
+          for line in open("receipts/receipts.jsonl"):
+              if not line.strip(): continue
+              rec = json.loads(line)
+              assert rec.get("matrix_sha256") == want, f"seq {rec.get('_chain',{}).get('seq')} pins a different matrix"
+              n += 1
+          print(f"{n} receipts pin matrix {want[:16]}...")
+          EOF

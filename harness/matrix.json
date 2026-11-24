@@ -1,0 +1,37 @@
+{
+  "kind": "siliconref-matrix-v0.1",
+  "probes": [
+    {"id": "P1", "category": "arithmetic", "prompt": "What is 17*23+5? Answer with only the number.", "max_tokens": 32, "expect_digit_only": true},
+    {"id": "P2", "category": "listgen", "prompt": "List exactly five US states, one per line, no numbering, no other text.", "max_tokens": 64, "expect_lines": 5},
+    {"id": "P3", "category": "code", "prompt": "Write a Python one-liner (no explanation) that prints the reverse of the string 'hello world'.", "max_tokens": 64, "expect_contains": "print"}
+  ],
+  "cells": [
+    {
+      "id": "cell-001",
+      "gpu": "NVIDIA GB10 (DGX Spark)",
+      "vendor": "nvidia",
+      "backend": "TensorFold (vLLM-compatible)",
+      "backend_version": "pico-qwen38-tf",
+      "model": "Qwen3.8-Flash-Next",
+      "precision": "vendor-managed",
+      "base_url": "http://spark-fceb:8888",
+      "api_key": null,
+      "thinking": "off",
+      "reproduce": "endpoint managed by TensorFold recipe on spark-fceb; see siliconref METHOD.md"
+    },
+    {
+      "id": "cell-002",
+      "gpu": "Apple M3 Pro (18GB)",
+      "vendor": "apple",
+      "backend": "llama.cpp Metal",
+      "backend_version": "llama-server (brew)",
+      "model": "Qwen3-4B-Instruct-2507-Q4_K_M",
+      "model_sha256": "3605803b982cb64aead44f6c1b2ae36e3acdb41d8e46c8a94c6533bc4c67e597",
+      "precision": "Q4_K_M",
+      "base_url": "http://127.0.0.1:8777",
+      "api_key": null,
+      "thinking": "off",
+      "reproduce": "llama-server -m Qwen3-4B-Instruct-2507-Q4_K_M.gguf --port 8777 -ngl 99 (sha256 3605803b982cb64a…)"
+    }
+  ]
+}

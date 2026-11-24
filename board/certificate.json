@@ -1,0 +1,50 @@
+{
+  "kind": "siliconref-certificate-v0.1",
+  "matrix_sha256": "5a88fddd07aa08e5374c2cbdc71d8089fe2728773e11da71c6012bfcc7772146",
+  "n_receipts": 2,
+  "chain_head": "21653629200d118ab06fbf6070ee29f5f6d4aed9a4f135c4b7a492f0ce379ed2",
+  "cells": {
+    "cell-001": {
+      "gpu": "NVIDIA GB10 (DGX Spark)",
+      "vendor": "nvidia",
+      "backend": "TensorFold (vLLM-compatible)",
+      "backend_version": "pico-qwen38-tf",
+      "model": "Qwen3.8-Flash-Next",
+      "precision": "vendor-managed",
+      "verdict": "FAIL",
+      "failures": [
+        "decode:stall"
+      ],
+      "median_tps": 33.545,
+      "min_tps": 8.9,
+      "max_tps": 45.13,
+      "bimodality_coef": 0.5463,
+      "bimodal_flag": false,
+      "ttft_median_s": 0.1269,
+      "n_samples": 24,
+      "reproduce": "endpoint managed by TensorFold recipe on spark-fceb; see siliconref METHOD.md",
+      "run_ts": "2026-11-24T07:57:26.682776+00:00",
+      "row_hash": "5e6e5c3b29a88103a426a41b62fee6673cd432ece47e61c1b7d3ff0a64efcfa1"
+    },
+    "cell-002": {
+      "gpu": "Apple M3 Pro (18GB)",
+      "vendor": "apple",
+      "backend": "llama.cpp Metal",
+      "backend_version": "llama-server (brew)",
+      "model": "Qwen3-4B-Instruct-2507-Q4_K_M",
+      "precision": "Q4_K_M",
+      "verdict": "PASS",
+      "failures": [],
+      "median_tps": 49.14,
+      "min_tps": 43.83,
+      "max_tps": 50.52,
+      "bimodality_coef": 0.6645,
+      "bimodal_flag": false,
+      "ttft_median_s": 0.0241,
+      "n_samples": 24,
+      "reproduce": "llama-server -m Qwen3-4B-Instruct-2507-Q4_K_M.gguf --port 8777 -ngl 99 (sha256 3605803b982cb64a\u2026)",
+      "run_ts": "2026-11-24T07:57:49.784923+00:00",
+      "row_hash": "21653629200d118ab06fbf6070ee29f5f6d4aed9a4f135c4b7a492f0ce379ed2"
+    }
+  }
+}
