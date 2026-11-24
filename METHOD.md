@@ -39,6 +39,10 @@ people built and grade themselves — same neutrality rules as
 2. Detectors are self-tested both directions (can pass, can fail) before
    any published number — `scripts/selftest.py` runs in CI.
 3. Every published number carries the exact command to reproduce it.
+   **Known exception:** seed receipt for cell-001 runs against a private
+   TensorFold endpoint we operate; until an independent Spark runner PRs a
+   receipt, that cell is "referee-attested on private hardware", not
+   third-party reproducible. Treat it accordingly.
 4. The referee never runs the servers it scores; runners do, from the
    pinned `reproduce` string.
 
