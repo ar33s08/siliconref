@@ -65,6 +65,10 @@ def suite_sha() -> str:
 
 
 def run_arm(label: str, url: str, model: str, thinking: str, quick: bool) -> dict:
+    # fail fast: a live completion or we do not measure garbage
+    probe = stream_one(url, model, "Reply with exactly: ready", 8, None, "off")
+    if probe["tokens"] < 1:
+        raise RuntimeError(f"arm {label} not producing tokens")
     speed_prompts = [("S1", S1, 300), ("S2", S2, 600), ("S3", S3, 200)]
     checks, failures = {}, []
 
@@ -137,7 +141,14 @@ def main() -> int:
         label, rest = spec.split("=", 1)
         url, model = rest.split(",", 1)
         print(f"### gauntlet arm {label} @ {url}", flush=True)
-        row = run_arm(label, url, model, args.thinking, args.quick)
+        try:
+            row = run_arm(label, url, model, args.thinking, args.quick)
+        except Exception as exc:
+            row = {"kind": "siliconref-gauntlet-v1", "suite_version": SUITE_VERSION,
+                   "suite_sha256": suite_sha(), "arm": label, "base_url": url,
+                   "model": model, "verdict": "ERROR",
+                   "failures": [f"{type(exc).__name__}: {exc}"],
+                   "checks": {}, "run_ts": datetime.now(timezone.utc).isoformat()}
         seq, h = rc.append(args.out, row)
         print(json.dumps({"seq": seq, "arm": label, "verdict": row["verdict"],
                           "failures": row["failures"],
