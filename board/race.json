@@ -1,0 +1,29 @@
+{
+  "suite_sha256": "aaaaaaaaaaaaaaaa",
+  "rows": [
+    {
+      "arm": "a",
+      "verdict": "PASS",
+      "S1 prose": 50,
+      "S2 code": 60,
+      "S3 math": 40,
+      "L1 32K": 60,
+      "L2 128K": null,
+      "c4 agg": 150,
+      "c8 agg": null,
+      "needle": true
+    },
+    {
+      "arm": "b",
+      "verdict": "PASS",
+      "S1 prose": 55,
+      "S2 code": 58,
+      "S3 math": 45,
+      "L1 32K": 70,
+      "L2 128K": null,
+      "c4 agg": 160,
+      "c8 agg": null,
+      "needle": true
+    }
+  ]
+}
